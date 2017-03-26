@@ -30,14 +30,15 @@ public class YouTubeApiController {
         return result;
     }
 
-    @RequestMapping(value={"/test-youtube-api"}, method=RequestMethod.GET)
+    @RequestMapping(value={"/test-dummy-api"}, method=RequestMethod.GET)
     public @ResponseBody List<YouTubeItem> testSearchYouTube(
             @RequestParam(value="search", required=true) String search,
             @RequestParam(value="items", required=false, defaultValue="1") String items) {
 
         int max = Integer.parseInt(items);
         List<YouTubeItem> result = new ArrayList<>();
-        result.add(new YouTubeItem("foo","bar","zar","far"));
+
+        result.add(new YouTubeItem("foo","bar","far","czar"));
         return result;
     }
 }

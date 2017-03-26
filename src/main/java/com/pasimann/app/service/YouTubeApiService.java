@@ -43,6 +43,7 @@ public class YouTubeApiService {
   private static final String YOUTUBE_SEARCH_TYPE     = "video";
   private static final String YOUTUBE_SEARCH_FIELDS   = "items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/default/url)";
   private static final String YOUTUBE_API_APPLICATION = "google-youtube-api-search";
+  private static final String YOUTUBE_APIKEY_ENV      = "YOUTUBE_APIKEY";
 
   private static final long NUMBER_OF_VIDEOS_RETURNED  = 25;
 
@@ -84,15 +85,22 @@ public class YouTubeApiService {
   			        // Define the API request for retrieving search results.
   	            YouTube.Search.List search = youtube.search().list("id,snippet");
 
-  	            // Set your developer key from the {{ Google Cloud Console }} for
-  	            // non-authenticated requests. See:
-  	            // {{ https://cloud.google.com/console }}
-  	            String apiKey = propertiesBundle.getString("youtube.apikey");
+                // Set your developer key from the {{ Google Cloud Console }} for
+                // non-authenticated requests. See:
+                // {{ https://cloud.google.com/console }}
+
+                String apiKey = System.getenv(YOUTUBE_APIKEY_ENV);
+
+                if ( apiKey == null ) {
+    	            apiKey = propertiesBundle.getString("youtube.apikey");
+                }
+
   	            search.setKey(apiKey);
   	            search.setQ(searchQuery);
 
   	            // Restrict the search results to only include videos. See:
   	            // https://developers.google.com/youtube/v3/docs/search/list#type
+
   	            search.setType(YOUTUBE_SEARCH_TYPE);
 
   	            // To increase efficiency, only retrieve the fields that the
@@ -126,10 +134,10 @@ public class YouTubeApiService {
 
   	            	for (SearchResult r : searchResultList) {
                     YouTubeItem item = new YouTubeItem(
-                                GOOGLE_YOUTUBE_URL + r.getId().getVideoId(),
-                                r.getSnippet().getTitle(),
-                                r.getSnippet().getThumbnails().getDefault().getUrl(),
-                                r.getSnippet().getDescription());
+                          GOOGLE_YOUTUBE_URL + r.getId().getVideoId(),
+                          r.getSnippet().getTitle(),
+                          r.getSnippet().getThumbnails().getDefault().getUrl(),
+                          r.getSnippet().getDescription());
   	            		rvalue.add(item);
   	            	}
 
@@ -147,7 +155,7 @@ public class YouTubeApiService {
   	      } catch (IOException e) {
   	    	  	log.warn("There was an IO error: " + e.getCause() + " : " + e.getMessage());
   	      } catch (Throwable t) {
-  	    	  log.warn("Severe errors!", t);
+  	    	    log.warn("Severe errors!", t);
   	          t.printStackTrace();
   	      }
 
