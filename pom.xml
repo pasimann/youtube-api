@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.pasimann.app</groupId>
+  <artifactId>youtube-api</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>youtube-api</name>
+
+  <parent>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-parent</artifactId>
+     <version>1.5.2.RELEASE</version>
+ </parent>
+
+  <dependencies>
+     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+      <version>LATEST</version>
+		</dependency>
+
+  <!-- YouTube Data V3 support -->
+		 <dependency>
+				 <groupId>com.google.apis</groupId>
+				 <artifactId>google-api-services-youtube</artifactId>
+				 <version>LATEST</version>
+		 </dependency>
+
+		 <!-- Required for any code that makes calls to the YouTube Analytics API -->
+     <dependency>
+         <groupId>com.google.apis</groupId>
+         <artifactId>google-api-services-youtubeAnalytics</artifactId>
+         <version>LATEST</version>
+     </dependency>
+
+     <!-- Required for any code that makes calls to the YouTube Reporting API -->
+     <dependency>
+         <groupId>com.google.apis</groupId>
+         <artifactId>google-api-services-youtubereporting</artifactId>
+         <version>LATEST</version>
+     </dependency>
+
+		 <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
+		 <dependency>
+				 <groupId>org.codehaus.jackson</groupId>
+				 <artifactId>jackson-mapper-asl</artifactId>
+				 <version>1.9.4</version>
+		 </dependency>
+
+		 <dependency>
+				 <groupId>com.google.http-client</groupId>
+				 <artifactId>google-http-client-jackson2</artifactId>
+				 <version>LATEST</version>
+		 </dependency>
+
+		 <dependency>
+				 <groupId>com.google.oauth-client</groupId>
+				 <artifactId>google-oauth-client-jetty</artifactId>
+				 <version>LATEST</version>
+		 </dependency>
+
+		 <dependency>
+				 <groupId>com.google.collections</groupId>
+				 <artifactId>google-collections</artifactId>
+				 <version>1.0</version>
+		 </dependency>
+
+ </dependencies>
+
+  <properties>
+     <java.version>1.8</java.version>
+  </properties>
+
+  <build>
+     <plugins>
+         <plugin>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+     </plugins>
+  </build>
+
+</project>
