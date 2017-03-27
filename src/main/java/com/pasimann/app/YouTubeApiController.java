@@ -38,7 +38,7 @@ public class YouTubeApiController {
         int max = Integer.parseInt(items);
         List<YouTubeItem> result = new ArrayList<>();
 
-        result.add(new YouTubeItem("foo","bar","far","czar"));
+        result.add(new YouTubeItem("foobar", search, "far", "czar"));
         return result;
     }
 }

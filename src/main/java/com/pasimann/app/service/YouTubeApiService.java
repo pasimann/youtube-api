@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.services.youtube.YouTube;
@@ -29,7 +29,7 @@ import com.pasimann.app.model.YouTubeItem;
  *  https://github.com/youtube/api-samples/blob/master/java/src/main/java/com/google/api/services/samples/youtube/cmdline/data/Search.java
  *
  */
-@Component
+@Service
 public class YouTubeApiService {
 
   private static Logger log = LoggerFactory.getLogger(YouTubeApiService.class);
