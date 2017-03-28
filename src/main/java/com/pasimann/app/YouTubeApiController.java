@@ -13,12 +13,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pasimann.app.model.YouTubeItem;
 import com.pasimann.app.service.YouTubeApiService;
+import com.pasimann.app.service.ChatMessageService;
 
 @Controller
 public class YouTubeApiController {
 
+    public class Message {
+
+      private String receiver;
+      private String msg;
+
+      public Message(String receiver, String msg) {
+        this.receiver = receiver;
+        this.msg = msg;
+      }
+
+      public String getReceiver() {
+        return this.receiver;
+      }
+
+      public String getMsg() {
+        return this.msg;
+      }
+
+    };
+
+
     @Autowired
     YouTubeApiService service;
+
+    @Autowired
+    ChatMessageService chat;
 
     @RequestMapping(value={"/google-youtube-api"}, method=RequestMethod.GET)
     public @ResponseBody List<YouTubeItem> searchYouTube(
@@ -40,5 +65,12 @@ public class YouTubeApiController {
 
         result.add(new YouTubeItem("foobar", search, "far", "czar"));
         return result;
+    }
+
+    @RequestMapping(value={"/generate-chat-message"}, method=RequestMethod.GET)
+    public @ResponseBody Message getRandomChatMessage(
+            @RequestParam(value="receiver", required=true) String receiver) {
+
+        return new Message(receiver, chat.generateChatMessage(receiver));
     }
 }
