@@ -1,19 +1,21 @@
-var express = require('express')
-var request = require('request')
+const express = require('express')
+const request = require('request')
+const qs      = require('querystring')
 
-var BASE_URL = 'http://localhost:8080'
+const BASE_URL  = 'http://localhost:8080'
+const NODE_PORT = 3000
 
-var app = express()
+const app = express()
 
-app.get('/hello', function (req, res) {
+app.get('/hello', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/message/:receiver', function (req, res, next) {
-  var receiver = req.params.receiver
-  var query = `receiver=${receiver}`
+app.get('/message/:receiver', (req, res, next) => {
+  const query = qs.stringify(req.params)
+
   request(`${BASE_URL}/generate-chat-message?${query}`,
-    function (error, response, body) {
+    (error, response, body) => {
       if (error) {
         console.log('ERROR with user request!')
         return res.sendStatus(response.statusCode)
@@ -23,6 +25,6 @@ app.get('/message/:receiver', function (req, res, next) {
   })
 })
 
-app.listen(3000, function () {
-  console.log('Express app listening port 3000')
+app.listen(NODE_PORT, () => {
+  console.log(`Express app listening port ${NODE_PORT}...`)
 })
