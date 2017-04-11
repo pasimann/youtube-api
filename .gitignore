@@ -1,3 +1,6 @@
 *.class
+.classpath
+.project
+.settings/
 target/
 node_modules/
